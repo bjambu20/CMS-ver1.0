@@ -1,0 +1,134 @@
+<!-- copyrighted content owned by Android Arena (www.androidarena.co.in)-->
+ 
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+   			 xmlns:tools="http://schemas.android.com/tools"
+           
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:background="#e8e8e7"
+        android:orientation="vertical" >
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:background="#13b586"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true">
+            
+            <ImageView android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/app_icon"
+            android:layout_marginLeft="10dp"/>
+        
+        
+        	<TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="#ffffff"
+        	android:layout_marginLeft="25dp"
+        	android:textSize="18sp"
+        	android:textStyle="bold"
+        	
+        	android:layout_gravity="center_horizontal|center_vertical"/>
+        	
+        	
+        	
+        	<LinearLayout  
+        	     android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="right"
+            android:orientation="horizontal" >
+        
+        </LinearLayout>
+    </LinearLayout>
+    
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/greybackground"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+            
+             <EditText android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:hint="Username"
+                android:background="#f3f3f3"
+                android:paddingLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:id="@+id/loginEmail"
+                />
+             
+             <EditText
+                 android:layout_width="fill_parent"
+                 android:layout_height="40dp"
+                 android:layout_marginTop="15dp"
+                 android:background="#f3f3f3"
+                 android:hint="Password"
+                 android:paddingLeft="5dp" 
+                 android:id="@+id/loginPassword"
+                 android:inputType="textPassword" />
+             
+             <LinearLayout 
+       android:layout_marginTop="10dp"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+     android:gravity="center_horizontal"
+      >
+
+      <TextView
+          android:id="@+id/login_error"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textColor="#000000"
+          android:textSize="16dp"
+          android:textStyle="bold" />
+      
+  </LinearLayout>
+             
+               <Button
+                   android:id="@+id/btnLogin"
+                   android:layout_width="190dp"
+                   android:layout_height="38dp"
+                   android:layout_gravity="center_horizontal"
+                   android:layout_marginTop="16dp"
+                   android:background="#2683c2"
+                   android:text="Login"
+                   android:textColor="#fff"
+                   android:textSize="13dp" />
+
+               <Button
+                   android:id="@+id/register"
+                   android:layout_width="190dp"
+                   android:layout_height="38dp"
+                   android:layout_marginTop="16dp"
+                   android:background="#ffff4444"
+                   android:text="Register"
+                   android:textColor="#fff"
+                   android:textSize="13dp" />
+
+               <Button
+                   android:id="@+id/barsacn"
+                   android:layout_width="190dp"
+                   android:layout_height="38dp"
+                   android:layout_marginTop="16dp"
+                   android:background="#13b586"
+                   android:text="Scan ID"
+                   android:textColor="#fff"
+                   android:textSize="13dp" />
+            
+        </LinearLayout>
+        
+      
+    
+</LinearLayout>
+        
+    
+
+  
