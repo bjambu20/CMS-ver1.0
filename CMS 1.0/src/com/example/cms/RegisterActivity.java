@@ -98,26 +98,17 @@ public class RegisterActivity extends Activity {
 				
 				// check for login response
 				try {
-					if (json.getString(KEY_SUCCESS) != null) {
+					JSONObject json_user = json.getJSONObject("user");
+					if (json_user.getString(KEY_SUCCESS) != null) {
 						registerErrorMsg.setText("");
-						String res = json.getString(KEY_SUCCESS); 
+						String res = json_user.getString(KEY_SUCCESS); 
 						if(Integer.parseInt(res) == 1){
 							// user successfully registred
 							// Store user details in SQLite Database
 							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-							JSONObject json_user = json.getJSONObject("user");
-							
 							// Clear all previous data in database
 							userFunction.logoutUser(getApplicationContext());
-							String str=json_user.getString(KEY_NAME);
-							str=json_user.getString(KEY_LNAME);
-							str=json_user.getString(KEY_MOBILE);
-							str=json_user.getString(KEY_DEPARTMENT);
-							str=json_user.getString(KEY_ROLE);
-							str=json_user.getString(KEY_ADDRESS);
-							str=json_user.getString(KEY_EMAIL);
-							str=json_user.getString(KEY_UID);
-							db.addUser(json_user.getString(KEY_UID));						
+							db.addUser(json_user.getString(KEY_UID),json_user.getString(KEY_EMAIL),json_user.getString(KEY_ADDRESS),json_user.getString(KEY_ROLE),json_user.getString(KEY_DEPARTMENT),json_user.getString(KEY_MOBILE),json_user.getString(KEY_LNAME),json_user.getString(KEY_NAME));						
 							// Launch Dashboard Screen
 							Intent dashboard = new Intent(getApplicationContext(), MainActivity.class);
 							// Close all views before launching Dashboard

@@ -72,26 +72,17 @@ public class Login extends Activity {
 
 				// check for login response
 				try {
-					if (json.getString(KEY_SUCCESS) != null) {
+					JSONObject json_user = json.getJSONObject("user");
+					if (json_user.getString(KEY_SUCCESS) != null) {
 						loginErrorMsg.setText("");
 						String res = json.getString(KEY_SUCCESS); 
 						if(Integer.parseInt(res) == 1){
-							// user successfully logged in
-							// Store user details in SQLite Database
 							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
-							JSONObject json_user = json.getJSONObject("user");
-							
-							// Clear all previous data in database
 							userFunction.logoutUser(getApplicationContext());
-							db.addUser(json_user.getString(KEY_UID));						
-							// Launch Dashboard Screen
+							db.addUser(json_user.getString(KEY_UID),json_user.getString(KEY_EMAIL),json_user.getString(KEY_ADDRESS),json_user.getString(KEY_ROLE),json_user.getString(KEY_DEPARTMENT),json_user.getString(KEY_MOBILE),json_user.getString(KEY_LNAME),json_user.getString(KEY_NAME));							// Launch Dashboard Screen
 							Intent dashboard = new Intent(getApplicationContext(), MainActivity.class);
-							
-							// Close all views before launching Dashboard
 							dashboard.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 							startActivity(dashboard);
-							
-							// Close Login Screen
 							finish();
 						}else{
 							// Error in login

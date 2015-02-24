@@ -33,11 +33,14 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             // user found
             // echo json with success = 1
             $response["success"] = 1;
-            $response["user"]["uid"] = $user["user_id"];
+           $response["user"]["uid"] = $user["user_id"];
             $response["user"]["name"] = $user["first_name"];
+            $response["user"]["lname"] = $user["last_name"];
+            $response["user"]["mobile"] = $user["mobile"];
+            $response["user"]["department"] = $user["cd_id"];
+            $response["user"]["role"] = $user["role"];
+            $response["user"]["address"] = $user["address"];
             $response["user"]["email"] = $user["login_name"];
-            $response["user"]["created_at"] = "null";
-            $response["user"]["updated_at"] = "null";
             echo json_encode($response);
         } else {
             // user not found

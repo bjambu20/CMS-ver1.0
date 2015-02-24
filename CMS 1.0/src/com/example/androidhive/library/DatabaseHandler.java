@@ -23,14 +23,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "android_api";
 
 	// Login table name
-	private static final String TABLE_LOGIN = "login";
+	private static final String TABLE_LOGIN = "cms_login";
 
 	// Login Table Columns names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_UID = "uid";
-	private static final String KEY_CREATED_AT = "created_at";
+	private static String KEY_LNAME = "lname";
+	private static String KEY_MOBILE = "mobile";
+	private static String KEY_DEPARTMENT = "department";
+	private static String KEY_ROLE = "role";
+	private static String KEY_ADDRESS = "address";
+	private static String KEY_CREATED_AT = "created_at";
 
 	public DatabaseHandler(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,9 +47,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_LOGIN + "("
 				+ KEY_ID + " INTEGER PRIMARY KEY," 
 				+ KEY_NAME + " TEXT,"
+				+ KEY_LNAME + " TEXT,"
+				+ KEY_MOBILE + " TEXT,"
+				+ KEY_DEPARTMENT + " TEXT,"
+				+ KEY_ROLE + " TEXT,"
+				+ KEY_ADDRESS + " TEXT,"
 				+ KEY_EMAIL + " TEXT UNIQUE,"
-				+ KEY_UID + " TEXT,"
-				+ KEY_CREATED_AT + " TEXT" + ")";
+				+ KEY_UID + " TEXT" + ")";
 		db.execSQL(CREATE_LOGIN_TABLE);
 	}
 
@@ -59,23 +68,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 
 	/**
-	 * Storing user details in database
-	 * @param string5 
-	 * @param string4 
-	 * @param string3 
-	 * @param string2 
-	 * @param string 
-	 * json_user.getString(KEY_NAME),json_user.getString(KEY_LNAME),json_user.getString(KEY_MOBILE),json_user.getString(KEY_DEPARTMENT),json_user.getString(KEY_ROLE),json_user.getString(KEY_ADDRESS), json_user.getString(KEY_EMAIL), json.getString(KEY_UID), json_user.getString(KEY_CREATED_AT)
+	 * KEY_UID,KEY_EMAIL,KEY_ADDRESS,KEY_ROLE,KEY_DEPARTMENT,KEY_MOBILE,KEY_LNAME,KEY_NAME
 	 * */
-	public void addUser(String name) {
+	public void addUser(String uid, String email, String address, String role, String department, String mobile, String lname, String name) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, name); // Name
-		values.put(KEY_EMAIL, name); // Email
-		values.put(KEY_UID, name); // Email
-		values.put(KEY_CREATED_AT, name); // Created At
-
+		values.put(KEY_UID, uid);
+		values.put(KEY_EMAIL, email);
+		values.put(KEY_ADDRESS, address);
+		values.put(KEY_ROLE, role);
+		values.put(KEY_DEPARTMENT, department);
+		values.put(KEY_MOBILE, mobile);
+		values.put(KEY_LNAME, lname);
+		values.put(KEY_NAME, name);
+		 
+		
 		// Inserting Row
 		db.insert(TABLE_LOGIN, null, values);
 		db.close(); // Closing database connection
@@ -83,6 +91,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	/**
 	 * Getting user data from database
+	 * 	+ KEY_ID + " INTEGER PRIMARY KEY," 
+				+ KEY_NAME + " TEXT,"
+				+ KEY_LNAME + " TEXT,"
+				+ KEY_MOBILE + " TEXT,"
+				+ KEY_DEPARTMENT + " TEXT,"
+				+ KEY_ROLE + " TEXT,"
+				+ KEY_ADDRESS + " TEXT,"
+				+ KEY_EMAIL + " TEXT UNIQUE,"
+				+ KEY_UID + " TEXT" + ")";
 	 * */
 	public HashMap<String, String> getUserDetails(){
 		HashMap<String,String> user = new HashMap<String,String>();
@@ -94,9 +111,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cursor.moveToFirst();
         if(cursor.getCount() > 0){
         	user.put("name", cursor.getString(1));
-        	user.put("email", cursor.getString(2));
-        	user.put("uid", cursor.getString(3));
-        	user.put("created_at", cursor.getString(4));
+        	user.put("lname", cursor.getString(2));
+        	user.put("mobile", cursor.getString(3));
+        	user.put("department", cursor.getString(4));
+        	user.put("role", cursor.getString(5));
+        	user.put("address", cursor.getString(6));
+        	user.put("email", cursor.getString(7));
+        	user.put("uid", cursor.getString(8));
         }
         cursor.close();
         db.close();
@@ -119,6 +140,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// return row count
 		return rowCount;
 	}
+	
+	
 	
 	/**
 	 * Re crate database

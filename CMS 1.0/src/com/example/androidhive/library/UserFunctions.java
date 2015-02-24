@@ -6,6 +6,7 @@
 package com.example.androidhive.library;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -18,8 +19,8 @@ public class UserFunctions {
 	
 	private JSONParser jsonParser;
 	
-	private static String loginURL = "http://192.168.56.1/cms/index.php?XDEBUG_SESSION_START=netbeans-xdebug";
-	private static String registerURL = "http://192.168.56.1/cms/index.php?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String loginURL = "http://192.168.1.3/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String registerURL = "http://192.168.1.3/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
 	
 	private static String login_tag = "login";
 	private static String register_tag = "register";
@@ -95,6 +96,13 @@ public class UserFunctions {
 	 * Function to logout user
 	 * Reset Database
 	 * */
+	public HashMap<String, String> getUserDetails(Context context){
+		
+		DatabaseHandler db = new DatabaseHandler(context);
+		HashMap<String, String> user= db.getUserDetails();
+		return user;
+	}
+	
 	public boolean logoutUser(Context context){
 		DatabaseHandler db = new DatabaseHandler(context);
 		db.resetTables();

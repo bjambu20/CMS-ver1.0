@@ -1,5 +1,8 @@
 package com.example.cms;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.example.androidhive.library.UserFunctions;
 
 import android.app.Fragment;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 	UserFunctions userFunctions;
 	Button btnLogout;
+	String id,lname,email,address,department,name,role,mobile;
 	public HomeFragment(){}
 	
 	@Override
@@ -22,7 +26,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 		 userFunctions = new UserFunctions();
 	        if(userFunctions.isUserLoggedIn(getActivity())){
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        
+        HashMap<String,String> user = userFunctions.getUserDetails(getActivity());
+        for (Map.Entry entry : user.entrySet()) {
+        	String str= entry.getKey().toString();
+
+        	System.out.println(entry.getKey() + ", " + entry.getValue());
+        }
+
+
         btnLogout= (Button) rootView.findViewById(R.id.btnLogout);
       
     	
