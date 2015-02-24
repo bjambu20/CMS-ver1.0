@@ -2,22 +2,25 @@ package com.example.cms;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.example.androidhive.library.UserFunctions;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 	UserFunctions userFunctions;
 	Button btnLogout;
 	String id,lname,email,address,department,name,role,mobile;
+	private int mRowCount = 0;
 	public HomeFragment(){}
 	
 	@Override
@@ -28,8 +31,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         HashMap<String,String> user = userFunctions.getUserDetails(getActivity());
         for (Map.Entry entry : user.entrySet()) {
+        	mRowCount++;
         	String str= entry.getKey().toString();
-
+        	TableLayout table = (TableLayout)rootView.findViewById(R.id.the_table);
+			TableRow row = new TableRow(this.getActivity());
+			TextView tv1 = new TextView(this.getActivity());
+			TextView tv = new TextView(this.getActivity());
+			tv.setText(entry.getKey().toString().toUpperCase());
+			tv1.setText(entry.getValue().toString());
+			tv.setGravity(Gravity.CENTER);
+//			tv1.setGravity(gravity)
+			row.addView(tv);row.addView(tv1);
+			table.addView(row);
+			
         	System.out.println(entry.getKey() + ", " + entry.getValue());
         }
 

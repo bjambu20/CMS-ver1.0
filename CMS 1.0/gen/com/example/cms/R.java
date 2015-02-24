@@ -16,6 +16,7 @@ public final class R {
         /**  Nav Drawer Menu Items 
          */
         public static final int nav_drawer_items=0x7f070000;
+        public static final int spinnerDay=0x7f070003;
         public static final int spinnerItems=0x7f070002;
     }
     public static final class attr {
@@ -63,12 +64,13 @@ public final class R {
         public static final int tick=0x7f020014;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a001f;
+        public static final int action_settings=0x7f0a0022;
         public static final int barsacn=0x7f0a0008;
         public static final int btnLogin=0x7f0a0006;
         public static final int btnLogout=0x7f0a001a;
         public static final int btnRegister=0x7f0a0019;
         public static final int counter=0x7f0a001d;
+        public static final int day=0x7f0a0020;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a001b;
@@ -93,6 +95,8 @@ public final class R {
         public static final int scrollView1=0x7f0a0009;
         public static final int spinner1=0x7f0a0013;
         public static final int textView1=0x7f0a000f;
+        public static final int the_table=0x7f0a001f;
+        public static final int timbutton=0x7f0a0021;
         public static final int title=0x7f0a001c;
         public static final int txtLabel=0x7f0a001e;
     }

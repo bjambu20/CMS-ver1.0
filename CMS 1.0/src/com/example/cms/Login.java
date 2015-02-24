@@ -75,7 +75,7 @@ public class Login extends Activity {
 					JSONObject json_user = json.getJSONObject("user");
 					if (json_user.getString(KEY_SUCCESS) != null) {
 						loginErrorMsg.setText("");
-						String res = json.getString(KEY_SUCCESS); 
+						String res = json_user.getString(KEY_SUCCESS); 
 						if(Integer.parseInt(res) == 1){
 							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
 							userFunction.logoutUser(getApplicationContext());

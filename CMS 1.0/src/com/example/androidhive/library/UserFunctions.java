@@ -17,11 +17,11 @@ import android.content.Context;
 
 public class UserFunctions {
 	
+	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String loginURL = "http://192.168.1.3/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
-	private static String registerURL = "http://192.168.1.3/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
-	
+	private static String loginURL = "http://192.168.56.1/cms/index.php";
+	private static String registerURL = "http://192.168.56.1/cms/index.php";
 	private static String login_tag = "login";
 	private static String register_tag = "register";
 	

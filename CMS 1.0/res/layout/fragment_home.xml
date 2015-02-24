@@ -30,4 +30,17 @@
         android:textColor="#fff"
         android:textSize="13dp" />
 
+    <TableLayout
+        android:id="@+id/the_table"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogout"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="12dip"
+        android:layout_marginTop="49dp"
+        android:paddingBottom="3dip"
+        android:scrollbars="vertical"
+        android:stretchColumns="*" >
+    </TableLayout>
+
 </RelativeLayout>

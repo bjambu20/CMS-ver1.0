@@ -35,6 +35,15 @@
         <item>CIVIL</item>
         <item>MEC</item>
     </string-array>
+     <string-array name="spinnerDay">
+        <item>Select Day</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
     
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
