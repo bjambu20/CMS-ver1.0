@@ -37,16 +37,43 @@ class DB_Functions {
         }
     }
     public function getTimetable($classid) {
-        $id=1;
-        $result = mysql_query("SELECT * FROM time_table WHERE time_id = $id");
+           $result = mysql_query("SELECT * FROM time_table WHERE time_id = $classid");
             // return user details
             return mysql_fetch_array($result);
     }
    public function getAttendancetable($classid) {
-        
-        $result = mysql_query("SELECT *FROM attendance WHERE student_id = $classid");
+        $response = array();
+        $result = mysql_query("SELECT * FROM attendance WHERE student_id = $classid");
             // return user details
-            return mysql_fetch_array($result);
+            //return mysql_fetch_array($result);
+            $response["products"] = array();
+    
+    while ($row = mysql_fetch_array($result)) {
+        // temp user array
+        $product = array();
+        $product["pid"] = $row["date"];
+        $product["name"] = $row["value"];
+        array_push($response["products"], $product);
+    }
+    return $response;
+    }
+    
+     public function getMarkstable($classid) {
+        $response = array();
+        $result = mysql_query("SELECT *FROM test1 WHERE class_id = $classid");
+            // return user details
+            //return mysql_fetch_array($result);
+            $response["products"] = array();
+    
+    while ($row = mysql_fetch_array($result)) {
+        // temp user array
+        $product = array();
+        $product["pid"] = $row["sub1"];
+        $product["name"] = $row["sub2"];
+        
+        array_push($response["products"], $product);
+    }
+    return $response;
     }
     /**
      * Get user by email and password

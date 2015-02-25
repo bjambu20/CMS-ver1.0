@@ -16,16 +16,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AttendanceActivty extends Fragment {
-	private int mRowCount = 0;
-	
-	
+public class MarksFragment extends Fragment {
 	TextView tv,tv2;
 	TableRow row,row2;
 	TableLayout table;
@@ -38,8 +34,8 @@ public class AttendanceActivty extends Fragment {
 	private static final String TAG_NAME = "name";
 	UserFunctions userFunction = new UserFunctions();
 	JSONArray products = null;
-	
-	public AttendanceActivty(){}
+	UserFunctions userFunctions;
+	public MarksFragment(){}
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,20 +45,21 @@ public class AttendanceActivty extends Fragment {
 			        new StrictMode.ThreadPolicy.Builder().permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 			}
-        View rootView = inflater.inflate(R.layout.fragment_attendance, container, false);
-        HashMap<String,String> user = new HashMap<String,String>();
-        HashMap<String, String> map = new HashMap<String, String>();
+        View rootView = inflater.inflate(R.layout.fragment_marks, container, false);
+     //   HashMap<String,String> user = userFunctions.getUserDetails(getActivity());
+    
         HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
-	        String value="uid";
-	        String cid=null;
-	        for(Map.Entry entry: userdetail.entrySet()){
-	            if(value.equals(entry.getKey())){
-	                cid = entry.getValue().toString();
-	                Toast.makeText(getActivity(), cid, 3000).show();
-	                break; //breaking because its one to one map
-	            }
-	        }
-        JSONObject str=userFunction.Userattendancetable(cid);
+        String value="department";
+        String cid=null;
+        for(Map.Entry entry: userdetail.entrySet()){
+            if(value.equals(entry.getKey())){
+                cid = entry.getValue().toString();
+                Toast.makeText(getActivity(), cid, 3000).show();
+                break; //breaking because its one to one map
+            }
+        }
+
+      JSONObject str=userFunction.Usermarkstable(cid);
         try {
  		//JSONObject json_user = str.getJSONObject("user");
  		products = str.getJSONArray(TAG_PRODUCTS);
@@ -90,6 +87,7 @@ public class AttendanceActivty extends Fragment {
  		e.printStackTrace();
  	}
       
+
 
         return rootView;
     }

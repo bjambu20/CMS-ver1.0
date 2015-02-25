@@ -115,6 +115,8 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         $classid = $_POST['classid'];
          $user = $db->getTimetable($classid);
         // if ($user) {
+         
+            
              $response["user"]["success"] = "1";
             $response["user"]["day"] = $user["day"];//"monday";
             $response["user"]["period1"] = $user["period1"];//"period1";//
@@ -137,11 +139,22 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
     
     else if ($tag == 'attendance'){
          $classid = $_POST['classid'];
-       //  $user = $db->getAttendancetable($classid);
-        $response["user"]["success"] = "1";
-            $response["user"]["day"] = "day";//$user["day"];//"monday";
-            $response["user"]["period1"] = "value";//$user["period1"];//"period1";//
-         echo json_encode($response);
+           $response["products"] = array();
+         $responce = $db->getAttendancetable($classid);
+//            $response["user"]["success"] = "1";
+//            $response["user"]["day"] = "day";//$user["day"];//"monday";
+//            $response["user"]["day1"] = "day1";//$user["day"];//"monday";
+//            $response["user"]["day2"] = "day2";//$user["day"];//"monday";
+//            $response["user"]["day3"] = "day3";//$user["day"];//"monday";
+//            $response["user"]["day4"] = "day4";//$user["day"];//"monday";
+//            $response["user"]["day5"] = "day5";//$user["day"];//"monday";
+//            $response["user"]["period1"] = "value";//$user["period1"];//"period1";//
+         echo json_encode($responce);
+    }else if ($tag == 'marks'){
+         $classid = $_POST['classid'];
+           $response["products"] = array();
+         $responce = $db->getMarkstable($classid);
+         echo json_encode($responce);
     } else  {
         
         echo "Invalid Request";

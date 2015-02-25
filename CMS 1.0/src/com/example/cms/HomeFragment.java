@@ -19,7 +19,6 @@ import android.widget.Toast;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 	UserFunctions userFunctions;
 	Button btnLogout;
-	String id,lname,email,address,department,name,role,mobile;
 	private int mRowCount = 0;
 	public HomeFragment(){}
 	

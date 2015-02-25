@@ -173,7 +173,7 @@ public class MainActivity extends Activity {
 			fragment = new TimetableActivity();
 			break;
 		case 3:
-			fragment = new CommunityFragment();
+			fragment = new MarksFragment();
 			break;
 		case 4:
 			fragment = new PagesFragment();

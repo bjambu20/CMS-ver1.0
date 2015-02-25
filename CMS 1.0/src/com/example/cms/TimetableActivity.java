@@ -75,7 +75,17 @@ public class TimetableActivity extends Fragment {
 	});
        
        HashMap<String,String> user = new HashMap<String,String>();
-       JSONObject str=userFunction.Usertimetable("12");
+       HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
+       String value="department";
+       String cid=null;
+       for(Map.Entry entry: userdetail.entrySet()){
+           if(value.equals(entry.getKey())){
+               cid = entry.getValue().toString();
+               Toast.makeText(getActivity(), cid, 3000).show();
+               break; //breaking because its one to one map
+           }
+       }
+       JSONObject str=userFunction.Usertimetable(cid);
        try {
 		JSONObject json_user = str.getJSONObject("user");
 		Toast.makeText(getActivity(), json_user.getString(KEY_SUCCESS), 3000).show();
