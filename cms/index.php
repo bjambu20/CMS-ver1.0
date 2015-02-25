@@ -10,6 +10,8 @@
   /**
  * check for POST request 
  */
+
+
 if (isset($_POST['tag']) && $_POST['tag'] != '') {
     // get tag
     $tag = $_POST['tag'];
@@ -32,7 +34,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         if ($user != false) {
             // user found
             // echo json with success = 1
-            $response["success"] = 1;
+            $response["user"]["success"] = "1";
            $response["user"]["uid"] = $user["user_id"];
             $response["user"]["name"] = $user["first_name"];
             $response["user"]["lname"] = $user["last_name"];
@@ -45,7 +47,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         } else {
             // user not found
             // echo json with error = 1
-            $response["error"] = 1;
+            $response["error"] = "1";
             $response["error_msg"] = "Incorrect email or password!";
             echo json_encode($response);
         }
@@ -76,7 +78,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         // check if user is already existed
         if ($db->isUserExisted($email)) {
             // user is already existed - error response
-            $response["error"] = 2;
+            $response["error"] = "2";
             $response["error_msg"] = "User already existed";
             echo json_encode($response);
         } else {
@@ -92,7 +94,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
                         private static String KEY_ROLE = "role";
                         private static String KEY_ADDRESS = "address";
                         private static String KEY_EMAIL = "email"; */
-                $response["success"] = 1;
+                $response["user"]["success"] = "1";
             $response["user"]["uid"] = $user["user_id"];
             $response["user"]["name"] = $user["first_name"];
             $response["user"]["lname"] = $user["last_name"];
@@ -104,12 +106,44 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             echo json_encode($response);
             } else {
                 // user failed to store
-                $response["error"] = 1;
+                $response["error"] = "1";
                 $response["error_msg"] = "Error occured in Registartion";
                 echo json_encode($response);
             }
         }
-    } else {
+    } else if ($tag == 'timetable') {
+        $classid = $_POST['classid'];
+         $user = $db->getTimetable($classid);
+        // if ($user) {
+             $response["user"]["success"] = "1";
+            $response["user"]["day"] = $user["day"];//"monday";
+            $response["user"]["period1"] = $user["period1"];//"period1";//
+            $response["user"]["period2"] = $user["period2"];//"period2";// $user["period2"];
+            $response["user"]["period3"] = $user["period3"];//"period3";// $user["period3"];
+            $response["user"]["period4"] =  $user["period4"];//"period4";//$user["period4"];
+            $response["user"]["period5"] = $user["period5"];//"period5";// $user["period5"];
+            $response["user"]["period6"] =  $user["period6"];//"period6";//$user["period6"];
+            $response["user"]["period7"] =  $user["period7"];//"period7";//$user["period7"];
+            $response["user"]["period8"] =  $user["period8"];//"period8";//$user["period8"];
+            echo json_encode($response);
+//            } else {
+//                // user failed to store
+//                $response["error"] = "1";
+//                $response["error_msg"] = "Error occured in Registartion";
+//                echo json_encode($response);
+//            }
+         
+    }
+    
+    else if ($tag == 'attendance'){
+         $classid = $_POST['classid'];
+       //  $user = $db->getAttendancetable($classid);
+        $response["user"]["success"] = "1";
+            $response["user"]["day"] = "day";//$user["day"];//"monday";
+            $response["user"]["period1"] = "value";//$user["period1"];//"period1";//
+         echo json_encode($response);
+    } else  {
+        
         echo "Invalid Request";
     }
 } else {

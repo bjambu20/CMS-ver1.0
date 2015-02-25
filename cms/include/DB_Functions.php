@@ -36,7 +36,18 @@ class DB_Functions {
             return false;
         }
     }
-
+    public function getTimetable($classid) {
+        $id=1;
+        $result = mysql_query("SELECT * FROM time_table WHERE time_id = $id");
+            // return user details
+            return mysql_fetch_array($result);
+    }
+   public function getAttendancetable($classid) {
+        
+        $result = mysql_query("SELECT *FROM attendance WHERE student_id = $classid");
+            // return user details
+            return mysql_fetch_array($result);
+    }
     /**
      * Get user by email and password
      */
