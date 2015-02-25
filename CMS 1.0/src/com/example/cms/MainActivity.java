@@ -167,7 +167,7 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
-			fragment = new FindPeopleFragment();
+			fragment = new AttendanceActivty();
 			break;
 		case 2:
 			fragment = new TimetableActivity();

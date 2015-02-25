@@ -22,10 +22,11 @@ public class UserFunctions {
 	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String URL = "http://192.168.56.1/cms/index.php?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String URL = "http://192.168.1.2/cms/index.php";
 	private static String login_tag = "login";
 	private static String register_tag = "register";
 	private static String timetable_tag = "timetable";
+	private static String attendancetable_tag = "attendance";
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
 	private static String KEY_ERROR_MSG = "error_msg";
@@ -55,7 +56,15 @@ public class UserFunctions {
 		// TODO Auto-generated method stub
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", timetable_tag));
-		params.add(new BasicNameValuePair("class_id", class_id));
+		params.add(new BasicNameValuePair("classid", class_id));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json;
+	}
+	public JSONObject Userattendancetable(String class_id) {
+		// TODO Auto-generated method stub
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", attendancetable_tag));
+		params.add(new BasicNameValuePair("classid", class_id));
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}

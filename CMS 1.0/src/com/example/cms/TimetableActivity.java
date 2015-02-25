@@ -5,9 +5,13 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.example.androidhive.library.UserFunctions;
+
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class TimetableActivity extends Fragment {
+	
 	private int mRowCount = 0;
 	private Spinner day;
 	
@@ -47,7 +52,11 @@ public class TimetableActivity extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
- 
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = 
+			        new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
+			}
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
         
 
@@ -59,51 +68,46 @@ public class TimetableActivity extends Fragment {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			Toast.makeText(getActivity(), "Done", 3000).show();
-		   	   String class_id="1";
-		   	   
-		       
-		   	UserFunctions userFunction = new UserFunctions();
-			JSONObject json = userFunction.registerUser2(class_id);
-			
-//		     try {
-//				String str=json.getString(KEY_SUCCESS);
-//				str=json.getString(KEY_DAY);
-//				str=json.getString(KEY_PERIOD1);
-//				str=json.getString(KEY_PERIOD2);
-//				str=json.getString(KEY_PERIOD3);
-//				str=json.getString(KEY_PERIOD4);
-//				str=json.getString(KEY_PERIOD5);
-//				str=json.getString(KEY_PERIOD6);
-//				str=json.getString(KEY_PERIOD7);
-//				str=json.getString(KEY_PERIOD8);
-//			} catch (JSONException e) {
-//				
-//				e.printStackTrace();
-//			}
-//		        
+			Intent i = new Intent(getActivity(), MainActivity.class);
+			startActivity(i);
+		   
 		}
 	});
        
-       
-       HashMap<String,String> user = userFunction.getUserDetails(getActivity());
-       
-       
-       for(int i=0;i<7;i++){ 
-    	   
-       table = (TableLayout)rootView.findViewById(R.id.the_table);
-  		row = new TableRow(this.getActivity());
-  		row2 = new TableRow(this.getActivity());
-  		tv = new TextView(this.getActivity());
-  		tv2 = new TextView(this.getActivity());
-		mRowCount++;
-  		tv.setText("Period "+Integer.toString(mRowCount));
-  		tv2.setText("Sub "+Integer.toString(mRowCount));
-  		tv.setGravity(Gravity.LEFT);
-  		tv2.setGravity(Gravity.LEFT);
-  		row.addView(tv);
-  		row.addView(tv2);
-  		table.addView(row);
-       }	
+       HashMap<String,String> user = new HashMap<String,String>();
+       JSONObject str=userFunction.Usertimetable("12");
+       try {
+		JSONObject json_user = str.getJSONObject("user");
+		Toast.makeText(getActivity(), json_user.getString(KEY_SUCCESS), 3000).show();
+		Toast.makeText(getActivity(), json_user.getString(KEY_DAY), 3000).show();
+		Toast.makeText(getActivity(), json_user.getString(KEY_PERIOD1), 3000).show();
+		user.put("sub1", json_user.getString(KEY_PERIOD1));
+		user.put("sub2", json_user.getString(KEY_PERIOD2));
+		user.put("sub3", json_user.getString(KEY_PERIOD3));
+		user.put("sub4", json_user.getString(KEY_PERIOD4));
+		user.put("sub5", json_user.getString(KEY_PERIOD5));
+		user.put("sub6", json_user.getString(KEY_PERIOD6));
+		user.put("sub7", json_user.getString(KEY_PERIOD7));
+		user.put("sub8", json_user.getString(KEY_PERIOD8));
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       for (Map.Entry entry : user.entrySet()) {
+       	mRowCount++;
+       	TableLayout table = (TableLayout)rootView.findViewById(R.id.the_table);
+			TableRow row = new TableRow(this.getActivity());
+			TextView tv1 = new TextView(this.getActivity());
+			TextView tv = new TextView(this.getActivity());
+			tv.setText(entry.getKey().toString());
+			tv1.setText(entry.getValue().toString());
+			tv.setGravity(Gravity.CENTER);
+//			tv1.setGravity(gravity)
+			row.addView(tv);row.addView(tv1);
+			table.addView(row);
+			
+       	System.out.println(entry.getKey() + ", " + entry.getValue());
+       }
         return rootView;
     }
 
