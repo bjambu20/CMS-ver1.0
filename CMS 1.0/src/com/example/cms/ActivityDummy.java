@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class ActivityDummy extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -162,7 +162,7 @@ public class MainActivity extends Activity {
 	private void displayView(int position) {
 		// update the main content by replacing fragments
 		Fragment fragment = null;
-		switch (position) {
+		switch (2) {
 		case 0:
 			fragment = new HomeFragment();
 			break;
@@ -170,13 +170,10 @@ public class MainActivity extends Activity {
 			fragment = new AttendanceActivty();
 			break;
 		case 2:
-//			fragment = new TimetableActivity();
-//			Bundle bundle=new Bundle();
-//			bundle.putString("message", "From Activity");
-			Bundle bundle=new Bundle();
-			bundle.putString("message", "Main Activity");
-			  //set Fragmentclass Arguments
 			fragment = new TimetableActivity();
+			Bundle bundle=new Bundle();
+			bundle.putString("message", "From Activity");
+			
 			fragment.setArguments(bundle);
 			break;
 		case 3:

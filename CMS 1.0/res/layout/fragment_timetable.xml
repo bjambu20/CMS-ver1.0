@@ -35,6 +35,11 @@
         android:paddingBottom="10dip"
         android:stretchColumns="*">
 	</TableLayout>
+	  <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+      
 
       <Button
           android:id="@+id/timbutton"
