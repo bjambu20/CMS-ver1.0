@@ -36,8 +36,8 @@ class DB_Functions {
             return false;
         }
     }
-    public function getTimetable($classid) {
-           $result = mysql_query("SELECT * FROM time_table WHERE time_id = $classid");
+    public function getTimetable($classid, $day) {
+           $result = mysql_query("SELECT * FROM time_table WHERE classid = '$classid' AND day='$day'");
             // return user details
             return mysql_fetch_array($result);
     }

@@ -53,18 +53,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         }
     } else if ($tag == 'register') {
         // Request type is Register new user
-	/**
-	 * function make Login Request
-	 * @param name
-	 * @param email
-	 * @param password
-	 * @param mobile 
-	 * @param lname 
-	 * @param department 
-	 * @param bloodgroup 
-	 * @param role 
-	 * @param address 
-	 * */
+
         $name = $_POST['name'];
         $lname = $_POST['lname'];
         $mobile = $_POST['mobile'];
@@ -85,15 +74,7 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             // store user
             $user = $db->storeUser($name, $lname, $mobile, $department, $bloodgroup, $role, $address, $email, $password);
             if ($user) {
-                // (KEY_NAME),(KEY_LNAME),(KEY_MOBILE),(KEY_DEPARTMENT),(KEY_ROLE),(KEY_ADDRESS),(KEY_EMAIL),(KEY_UID)
-                /*	private static String KEY_UID = "uid";
-                        private static String KEY_NAME = "name";
-                        private static String KEY_LNAME = "lname";
-                        private static String KEY_MOBILE = "mobile";
-                        private static String KEY_DEPARTMENT = "department";
-                        private static String KEY_ROLE = "role";
-                        private static String KEY_ADDRESS = "address";
-                        private static String KEY_EMAIL = "email"; */
+             
                 $response["user"]["success"] = "1";
             $response["user"]["uid"] = $user["user_id"];
             $response["user"]["name"] = $user["first_name"];
@@ -113,11 +94,9 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
         }
     } else if ($tag == 'timetable') {
         $classid = $_POST['classid'];
-         $user = $db->getTimetable($classid);
-        // if ($user) {
-         
-            
-             $response["user"]["success"] = "1";
+        $day =$_POST['day'];
+            $user = $db->getTimetable($classid, $day);
+            $response["user"]["success"] = "1";
             $response["user"]["day"] = $user["day"];//"monday";
             $response["user"]["period1"] = $user["period1"];//"period1";//
             $response["user"]["period2"] = $user["period2"];//"period2";// $user["period2"];
@@ -128,27 +107,14 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
             $response["user"]["period7"] =  $user["period7"];//"period7";//$user["period7"];
             $response["user"]["period8"] =  $user["period8"];//"period8";//$user["period8"];
             echo json_encode($response);
-//            } else {
-//                // user failed to store
-//                $response["error"] = "1";
-//                $response["error_msg"] = "Error occured in Registartion";
-//                echo json_encode($response);
-//            }
-         
+          
     }
     
     else if ($tag == 'attendance'){
          $classid = $_POST['classid'];
            $response["products"] = array();
          $responce = $db->getAttendancetable($classid);
-//            $response["user"]["success"] = "1";
-//            $response["user"]["day"] = "day";//$user["day"];//"monday";
-//            $response["user"]["day1"] = "day1";//$user["day"];//"monday";
-//            $response["user"]["day2"] = "day2";//$user["day"];//"monday";
-//            $response["user"]["day3"] = "day3";//$user["day"];//"monday";
-//            $response["user"]["day4"] = "day4";//$user["day"];//"monday";
-//            $response["user"]["day5"] = "day5";//$user["day"];//"monday";
-//            $response["user"]["period1"] = "value";//$user["period1"];//"period1";//
+
          echo json_encode($responce);
     }else if ($tag == 'marks'){
          $classid = $_POST['classid'];
