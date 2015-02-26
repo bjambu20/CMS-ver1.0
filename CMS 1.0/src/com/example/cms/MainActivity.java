@@ -176,7 +176,6 @@ public class MainActivity extends Activity {
 		case 2:
 			Bundle bundle=new Bundle();
 			bundle.putString("message", message);
-			  //set Fragmentclass Arguments
 			fragment = new TimetableActivity();
 			fragment.setArguments(bundle);
 			break;
