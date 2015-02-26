@@ -46,22 +46,19 @@ public class MarksFragment extends Fragment {
 			StrictMode.setThreadPolicy(policy);
 			}
         View rootView = inflater.inflate(R.layout.fragment_marks, container, false);
-     //   HashMap<String,String> user = userFunctions.getUserDetails(getActivity());
-    
-        HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
+         HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
         String value="department";
         String cid=null;
         for(Map.Entry entry: userdetail.entrySet()){
             if(value.equals(entry.getKey())){
                 cid = entry.getValue().toString();
                 Toast.makeText(getActivity(), cid, 3000).show();
-                break; //breaking because its one to one map
-            }
+                break;             }
         }
 
       JSONObject str=userFunction.Usermarkstable(cid);
         try {
- 		//JSONObject json_user = str.getJSONObject("user");
+ 		
  		products = str.getJSONArray(TAG_PRODUCTS);
 
 		// looping through All Products

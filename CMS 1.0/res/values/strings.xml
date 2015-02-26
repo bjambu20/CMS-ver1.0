@@ -44,6 +44,24 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
+    <string-array name="spinnerTest">
+        <item>Select Test</item>
+        <item>test1</item>
+        <item>test2</item>
+        <item>test3</item>
+        <item>test4</item>
+        <item>test5</item>
+    </string-array>
+    <string-array name="spinnerSub">
+        <item>Select Subject</item>
+        <item>sub1</item>
+        <item>sub2</item>
+        <item>sub3</item>
+        <item>sub3</item>
+        <item>sub4</item>
+        <item>sub5</item>
+        <item>sub6</item>
+    </string-array>
     
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
