@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -27,7 +29,7 @@ import android.widget.Toast;
 public class TimetableActivity extends Fragment {
 	
 	private int mRowCount = 0;
-//	private Spinner day;
+	private Spinner selectday;
 	String  strtext=null;
 	String day=null;
 	private static String KEY_SUCCESS = "success";
@@ -49,8 +51,9 @@ public class TimetableActivity extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-		strtext=getArguments().getString("message");
-	
+		
+		day=getArguments().getString("message");
+	 
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = 
 			        new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -58,7 +61,16 @@ public class TimetableActivity extends Fragment {
 			}
         View rootView = inflater.inflate(R.layout.fragment_timetable, container, false);
         
-
+        selectday=(Spinner) rootView.findViewById(R.id.day);
+//        
+//        selectday.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//		
+//			}
+//		});
        Button  btnLogout= (Button) rootView.findViewById(R.id.timbutton);
        btnLogout.setOnClickListener(new OnClickListener() {
     	  
@@ -66,16 +78,21 @@ public class TimetableActivity extends Fragment {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			Toast.makeText(getActivity(), strtext, 3000).show();
+			//Toast.makeText(getActivity(), strtext, 3000).show();
+			
+			int d=selectday.getSelectedItemPosition();
+			String arr[] = getResources().getStringArray(R.array.spinnerDay);
+			day=arr[d];
 			Intent intent = new Intent(getActivity().getBaseContext(),
-                    ActivityDummy.class);
-            intent.putExtra("message", "day");
+                    MainActivity.class);
+            intent.putExtra("message", day);
             getActivity().startActivity(intent);
-		   
+            getActivity().finish();
 		}
 	});
        
-       if(day!=null){
+       if(day!=null && day!="day"){
+    	   Toast.makeText(getActivity(), day, 3000).show();
        HashMap<String,String> user = new HashMap<String,String>();
        HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
        String value="department";
@@ -87,7 +104,7 @@ public class TimetableActivity extends Fragment {
                break; //breaking because its one to one map
            }
        }
-       JSONObject str=userFunction.Usertimetable(cid);
+       JSONObject str=userFunction.Usertimetable(cid,day);
        try {
 		JSONObject json_user = str.getJSONObject("user");
 //		Toast.makeText(getActivity(), json_user.getString(KEY_SUCCESS), 3000).show();

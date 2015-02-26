@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class MainActivity extends Activity {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-
+	String message=null;
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -42,7 +43,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
-
+		Intent intent = getIntent();
+		 message= intent.getStringExtra("message");
+		 
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -109,6 +112,7 @@ public class MainActivity extends Activity {
 			// on first time display view for first nav item
 			displayView(0);
 		}
+		if(message!=null) displayView(2); 
 	}
 
 	/**
@@ -170,11 +174,8 @@ public class MainActivity extends Activity {
 			fragment = new AttendanceActivty();
 			break;
 		case 2:
-//			fragment = new TimetableActivity();
-//			Bundle bundle=new Bundle();
-//			bundle.putString("message", "From Activity");
 			Bundle bundle=new Bundle();
-			bundle.putString("message", "Main Activity");
+			bundle.putString("message", message);
 			  //set Fragmentclass Arguments
 			fragment = new TimetableActivity();
 			fragment.setArguments(bundle);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class ActivityDummy extends Activity {
 	// slide menu items
 	private String[] navMenuTitles;
 	private TypedArray navMenuIcons;
-
+	String message;
 	private ArrayList<NavDrawerItem> navDrawerItems;
 	private NavDrawerListAdapter adapter;
 
@@ -42,6 +43,9 @@ public class ActivityDummy extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dashboard);
+		
+		Intent intent = getIntent();
+		 message= intent.getStringExtra("message");
 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -170,10 +174,13 @@ public class ActivityDummy extends Activity {
 			fragment = new AttendanceActivty();
 			break;
 		case 2:
-			fragment = new TimetableActivity();
+//			fragment = new TimetableActivity();
+//			Bundle bundle=new Bundle();
+//			bundle.putString("message", "From Activity");
 			Bundle bundle=new Bundle();
-			bundle.putString("message", "From Activity");
-			
+			bundle.putString("message", message);
+			  //set Fragmentclass Arguments
+			fragment = new TimetableActivity();
 			fragment.setArguments(bundle);
 			break;
 		case 3:
