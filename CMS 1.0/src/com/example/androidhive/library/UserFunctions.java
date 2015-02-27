@@ -22,9 +22,10 @@ public class UserFunctions {
 	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String URL = "http://10.0.0.15/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String URL = "http://14.99.29.119/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
 	//private static String URL = "http://192.168.1.2/cms/index.phpXDEBUG_SESSION_START=netbeans-xdebug";
 	private static String login_tag = "login";
+	private static String loginid_tag = "loginid";
 	private static String register_tag = "register";
 	private static String timetable_tag = "timetable";
 	private static String attendancetable_tag = "attendance";
@@ -54,6 +55,18 @@ public class UserFunctions {
 		// Log.e("JSON", json.toString());
 		return json;
 	}
+	public JSONObject loginUserbyID(String id){
+		// Building Parameters
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", loginid_tag));
+		params.add(new BasicNameValuePair("uid", id));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		// return json
+		// Log.e("JSON", json.toString());
+		return json;
+	}
+	
+	
 	public JSONObject Usertimetable(String class_id, String day) {
 		// TODO Auto-generated method stub
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -71,11 +84,13 @@ public class UserFunctions {
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}
-	public JSONObject Usermarkstable(String class_id) {
+	public JSONObject Usermarkstable(String class_id,String test,String sub) {
 		// TODO Auto-generated method stub
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", marks_tag));
 		params.add(new BasicNameValuePair("classid", class_id));
+		params.add(new BasicNameValuePair("test", test));
+		params.add(new BasicNameValuePair("sub", sub));
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}
@@ -162,6 +177,8 @@ public class UserFunctions {
 		db.resetTables();
 		return true;
 	}
+
+	
 
 	
 }

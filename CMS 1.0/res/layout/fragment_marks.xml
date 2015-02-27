@@ -42,14 +42,14 @@
         </LinearLayout>
 
         <Spinner
-            android:id="@+id/spinner1"
+            android:id="@+id/spinnerTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/spinnerTest"
             android:gravity="center" />
 
         <Spinner
-            android:id="@+id/spinner2"
+            android:id="@+id/spinnerSub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/spinnerSub"

@@ -118,9 +118,34 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
          echo json_encode($responce);
     }else if ($tag == 'marks'){
          $classid = $_POST['classid'];
+         $test = $_POST['test'];
+         $sub = $_POST['sub'];
            $response["products"] = array();
-         $responce = $db->getMarkstable($classid);
+         $responce = $db->getMarkstable($classid, $test, $sub);
          echo json_encode($responce);
+    } else if ($tag == 'loginid'){
+         $uid = $_POST['uid'];
+         $user = $db->getloginbyId($uid);
+             if ($user != false) {
+            // user found
+            // echo json with success = 1
+            $response["user"]["success"] = "1";
+           $response["user"]["uid"] = $user["user_id"];
+            $response["user"]["name"] = $user["first_name"];
+            $response["user"]["lname"] = $user["last_name"];
+            $response["user"]["mobile"] = $user["mobile"];
+            $response["user"]["department"] = $user["cd_id"];
+            $response["user"]["role"] = $user["role"];
+            $response["user"]["address"] = $user["address"];
+            $response["user"]["email"] = $user["login_name"];
+            echo json_encode($response);
+        } else {
+            // user not found
+            // echo json with error = 1
+            $response["error"] = "1";
+            $response["error_msg"] = "Incorrect email or password!";
+            echo json_encode($response);
+        }
     } else  {
         
         echo "Invalid Request";

@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	String message=null;
+	String message1=null;
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_dashboard);
 		Intent intent = getIntent();
 		 message= intent.getStringExtra("message");
+		 message1= intent.getStringExtra("message1");
 		 
 		mTitle = mDrawerTitle = getTitle();
 
@@ -112,7 +114,8 @@ public class MainActivity extends Activity {
 			// on first time display view for first nav item
 			displayView(0);
 		}
-		if(message!=null) displayView(2); 
+		if(message!=null && message1==null) displayView(2); 
+		if(message!=null && message1!=null) displayView(3);
 	}
 
 	/**
@@ -178,9 +181,17 @@ public class MainActivity extends Activity {
 			bundle.putString("message", message);
 			fragment = new TimetableActivity();
 			fragment.setArguments(bundle);
+			message=null;
+			message1=null;
 			break;
 		case 3:
+			Bundle bundle1=new Bundle();
+			bundle1.putString("message", message);
+			bundle1.putString("message1", message1);
 			fragment = new MarksFragment();
+			fragment.setArguments(bundle1);
+			message=null;
+			message1=null;
 			break;
 		case 4:
 			fragment = new PagesFragment();

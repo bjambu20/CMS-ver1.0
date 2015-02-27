@@ -2,14 +2,13 @@ package com.example.cms;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import com.example.androidhive.library.UserFunctions;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Gravity;
@@ -136,8 +135,56 @@ public class TimetableActivity extends Fragment {
 			}
 			
 		}
-
+		  new CountDownTask().execute();
 		return rootView;
 	}
+	 private class CountDownTask extends AsyncTask<Void, Integer, Void>{
+	    	
+	    	// A callback method executed on UI thread on starting the task
+	    	@Override
+	    	protected void onPreExecute() {
+	    		// Getting reference to the TextView tv_counter of the layout activity_main
+//	    		TextView tvCounter = (TextView) findViewById(R.id.tv_counter);
+//	    		tvCounter.setText("******** Countdown Starts ********");
+	    		Toast.makeText(getActivity(), "******** Countdown Starts ********", 1000).show();
+	    	}
+
+	    	// A callback method executed on non UI thread, invoked after 
+	    	// onPreExecute method if exists
+			@Override
+			protected Void doInBackground(Void... params) {
+				for(int i=10;i>=0;i--){
+					try {
+						Thread.sleep(1000);
+						publishProgress(i); // Invokes onProgressUpdate()
+					} catch (InterruptedException e) {
+					}
+				}
+				return null;
+			}
+			
+			// A callback method executed on UI thread, invoked by the publishProgress() 
+			// from doInBackground() method
+			@Override
+			protected void onProgressUpdate(Integer... values) {
+				// Getting reference to the TextView tv_counter of the layout activity_main
+				//TextView tvCounter = (TextView) findViewById(R.id.tv_counter);
+				
+				// Updating the TextView 
+				//tvCounter.setText( Integer.toString(values[0].intValue()));		
+	    		Toast.makeText(getActivity(), Integer.toString(values[0].intValue()), 1000).show();
+
+			}
+			
+			// A callback method executed on UI thread, invoked after the completion of the task
+			@Override
+			protected void onPostExecute(Void result) {
+				// Getting reference to the TextView tv_counter of the layout activity_main
+				//TextView tvCounter = (TextView) findViewById(R.id.tv_counter);
+				//tvCounter.setText("******** DONE ********");	
+				Toast.makeText(getActivity(), "******** Done ********", 1000).show();
+	    	
+			}		
+	    }
 
 }

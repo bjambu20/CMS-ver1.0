@@ -23,7 +23,7 @@ class DB_Functions {
      * returns user details
      */
     public function storeUser($name, $lname, $mobile, $department, $bloodgroup, $role, $address, $email, $password) {
-    
+
         $result = mysql_query("INSERT INTO sec_user(first_name,  last_name, mobile, cd_id, bloodgroup, role, address, login_name, password) VALUES('$name', '$lname', '$mobile', '$department', '$bloodgroup', '$role', '$address', '$email', '$password')");
         // check for successful store
         if ($result) {
@@ -36,45 +36,48 @@ class DB_Functions {
             return false;
         }
     }
+
     public function getTimetable($classid, $day) {
-           $result = mysql_query("SELECT * FROM time_table WHERE classid = '$classid' AND day='$day'");
-            // return user details
-            return mysql_fetch_array($result);
+        $result = mysql_query("SELECT * FROM time_table WHERE classid = '$classid' AND day='$day'");
+        // return user details
+        return mysql_fetch_array($result);
     }
-   public function getAttendancetable($classid) {
+
+    public function getAttendancetable($classid) {
         $response = array();
         $result = mysql_query("SELECT * FROM attendance WHERE student_id = $classid");
-            // return user details
-            //return mysql_fetch_array($result);
-            $response["products"] = array();
-    
-    while ($row = mysql_fetch_array($result)) {
-        // temp user array
-        $product = array();
-        $product["pid"] = $row["date"];
-        $product["name"] = $row["value"];
-        array_push($response["products"], $product);
+        // return user details
+        //return mysql_fetch_array($result);
+        $response["products"] = array();
+
+        while ($row = mysql_fetch_array($result)) {
+            // temp user array
+            $product = array();
+            $product["pid"] = $row["date"];
+            $product["name"] = $row["value"];
+            array_push($response["products"], $product);
+        }
+        return $response;
     }
-    return $response;
-    }
-    
-     public function getMarkstable($classid) {
+
+    public function getMarkstable($classid, $test, $sub) {
         $response = array();
-        $result = mysql_query("SELECT *FROM test1 WHERE class_id = $classid");
-            // return user details
-            //return mysql_fetch_array($result);
-            $response["products"] = array();
-    
-    while ($row = mysql_fetch_array($result)) {
-        // temp user array
-        $product = array();
-        $product["pid"] = $row["sub1"];
-        $product["name"] = $row["sub2"];
-        
-        array_push($response["products"], $product);
+        $result = mysql_query("SELECT *FROM $test WHERE student_id = $classid");
+        // return user details
+        //return mysql_fetch_array($result);
+        $response["products"] = array();
+
+        while ($row = mysql_fetch_array($result)) {
+            // temp user array
+            $product = array();
+            $product["pid"] = $sub;
+            $product["name"] = $row[$sub];
+
+            array_push($response["products"], $product);
+        }
+        return $response;
     }
-    return $response;
-    }
+
     /**
      * Get user by email and password
      */
@@ -96,6 +99,19 @@ class DB_Functions {
         }
     }
 
+    public function getloginbyId($uid) {
+        $result = mysql_query("SELECT * FROM sec_user WHERE user_id = '$uid'") or die(mysql_error());
+        // check for result 
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            $result = mysql_fetch_array($result);
+            return $result;
+        } else {
+            // user not found
+            return false;
+        }
+    }
+
     /**
      * Check user is existed or not
      */
@@ -105,7 +121,6 @@ class DB_Functions {
         if ($no_of_rows > 0) {
             // user existed 
             return true;
-            
         } else {
             // user not existed
             return false;
