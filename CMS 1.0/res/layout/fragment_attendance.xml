@@ -35,6 +35,23 @@
 
 </RelativeLayout>
 
+<Spinner
+    android:id="@+id/spinnerClassid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/spinnerCid"
+            android:gravity="center" />
+
+<EditText
+    android:id="@+id/datein"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:ems="10"
+    android:inputType="date" >
+
+    <requestFocus />
+</EditText>
+
  <TableLayout
 		android:layout_margin="12dip"
         android:layout_width="fill_parent"
@@ -44,6 +61,12 @@
         android:paddingBottom="10dip"
         android:stretchColumns="*">
 	</TableLayout>
+	<Button
+            android:id="@+id/timbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#13b586"
+            android:text="Submit" />
 </LinearLayout>
 
 </ScrollView>

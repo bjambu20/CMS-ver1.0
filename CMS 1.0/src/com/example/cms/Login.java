@@ -75,11 +75,9 @@ public class Login extends Activity {
 
 				// check for login response
 				try {
-					
-					
-					if (json.getString(KEY_SUCCESS) =="0") {
+					JSONObject json_user = json.getJSONObject("user");
+					if (json_user.getString(KEY_SUCCESS) != null) {
 						loginErrorMsg.setText("");
-						JSONObject json_user = json.getJSONObject("user");
 						String res = json_user.getString(KEY_SUCCESS); 
 						if(Integer.parseInt(res) == 1){
 							DatabaseHandler db = new DatabaseHandler(getApplicationContext());
@@ -92,12 +90,7 @@ public class Login extends Activity {
 						}else{
 							// Error in login
 							loginErrorMsg.setText("Incorrect username/password");
-							Toast.makeText(getApplicationContext(), "Incorrect username/password", 3000).show();
 						}
-					}else{
-						// Error in login
-						loginErrorMsg.setText("Incorrect username/password");
-						Toast.makeText(getApplicationContext(), "Incorrect username/password", 3000).show();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

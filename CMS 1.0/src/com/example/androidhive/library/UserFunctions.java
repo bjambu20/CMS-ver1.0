@@ -22,14 +22,16 @@ public class UserFunctions {
 	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String URL = "http://14.99.29.119/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String URL = "http://14.96.13.66/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
 	//private static String URL = "http://192.168.1.2/cms/index.phpXDEBUG_SESSION_START=netbeans-xdebug";
 	private static String login_tag = "login";
 	private static String loginid_tag = "loginid";
 	private static String register_tag = "register";
 	private static String timetable_tag = "timetable";
 	private static String attendancetable_tag = "attendance";
+	private static String facultyattendancetable_tag = "facultyattendance";
 	private static String marks_tag = "marks";
+	private static String facultymarks_tag = "faculty_marks";
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
 	private static String KEY_ERROR_MSG = "error_msg";
@@ -84,10 +86,29 @@ public class UserFunctions {
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}
+	public JSONObject Userattendancetable(String class_id, String date) {
+		// TODO Auto-generated method stub
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", facultyattendancetable_tag));
+		params.add(new BasicNameValuePair("classid", class_id));
+		params.add(new BasicNameValuePair("date", date));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json;
+	}
 	public JSONObject Usermarkstable(String class_id,String test,String sub) {
 		// TODO Auto-generated method stub
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", marks_tag));
+		params.add(new BasicNameValuePair("classid", class_id));
+		params.add(new BasicNameValuePair("test", test));
+		params.add(new BasicNameValuePair("sub", sub));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json;
+	}	
+	public JSONObject Facultymarkstable(String class_id,String test,String sub) {
+		// TODO Auto-generated method stub
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", facultymarks_tag));
 		params.add(new BasicNameValuePair("classid", class_id));
 		params.add(new BasicNameValuePair("test", test));
 		params.add(new BasicNameValuePair("sub", sub));

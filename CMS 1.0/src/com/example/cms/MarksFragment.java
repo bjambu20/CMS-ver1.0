@@ -28,9 +28,10 @@ import android.widget.Toast;
 public class MarksFragment extends Fragment {
 	TextView tv,tv2;
 	TableRow row,row2;
-	private Spinner testspinner,subspinner;
+	private Spinner testspinner,subspinner,classid;
 	TableLayout table;
 	String test,sub;
+	String cid=null;int ci=0;
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
 	private static String KEY_ERROR_MSG = "error_msg";
@@ -45,8 +46,23 @@ public class MarksFragment extends Fragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+		HashMap<String, String> userdetail_role = userFunction
+				.getUserDetails(getActivity());
+		String role = "role";
+		for (Map.Entry entry : userdetail_role.entrySet()) {
+			if (role.equals(entry.getKey())) {
+				role = entry.getValue().toString();
+				Toast.makeText(getActivity(), cid, 3000).show();
+				break; // breaking because its one to one map
+			}
+		}
 		test=getArguments().getString("message");
 		sub=getArguments().getString("message1");
+		ci = getArguments().getInt("cid");
+		if(0<ci)
+		{
+			cid=Integer.toString(ci);
+		}
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = 
 			        new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -55,16 +71,20 @@ public class MarksFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_marks, container, false);
          HashMap<String, String> userdetail=userFunction.getUserDetails(getActivity());
         String value="uid";
-        String cid=null;
+        if(cid==null){
         for(Map.Entry entry: userdetail.entrySet()){
             if(value.equals(entry.getKey())){
                 cid = entry.getValue().toString();
                 Toast.makeText(getActivity(), cid, 3000).show();
                 break;             }
-        }
+        }}
         testspinner = (Spinner) rootView.findViewById(R.id.spinnerTest);
         subspinner =  (Spinner) rootView.findViewById(R.id.spinnerSub);
+        classid =  (Spinner) rootView.findViewById(R.id.spinnerClassid);
     	Button btnLogout = (Button) rootView.findViewById(R.id.timbutton);
+    	if(role.equalsIgnoreCase("Student")){
+			classid.setVisibility(View.GONE);
+		}
 		btnLogout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -74,6 +94,7 @@ public class MarksFragment extends Fragment {
 
 				int d = testspinner.getSelectedItemPosition();
 				int s = subspinner.getSelectedItemPosition();
+				int cd = classid.getSelectedItemPosition();
 				String arr[] = getResources().getStringArray(R.array.spinnerTest);
 				test = arr[d];
 				String arr1[] = getResources().getStringArray(R.array.spinnerSub);
@@ -82,12 +103,19 @@ public class MarksFragment extends Fragment {
 						MainActivity.class);
 				intent.putExtra("message", test);
 				intent.putExtra("message1", sub);
+				intent.putExtra("cid", cd);
 				getActivity().startActivity(intent);
 				getActivity().finish();
 			}
 		});
         if(test!=null&&sub!=null){
-      JSONObject str=userFunction.Usermarkstable(cid,test,sub);
+        	JSONObject str;
+        	if(role.equalsIgnoreCase("student")){
+        		str=userFunction.Usermarkstable(cid,test,sub);}
+        	else{
+        		str=userFunction.Facultymarkstable(cid,test,sub);	
+        	}
+      
         try {
  		
  		products = str.getJSONArray(TAG_PRODUCTS);

@@ -48,6 +48,12 @@
             android:entries="@array/spinnerDay" 
             android:gravity="center"/>
 
+        <Spinner
+            android:id="@+id/classid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/spinnerCid"  />
+
       <TableLayout
 		android:layout_margin="12dip"
         android:layout_width="fill_parent"

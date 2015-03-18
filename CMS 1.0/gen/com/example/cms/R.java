@@ -16,10 +16,11 @@ public final class R {
         /**  Nav Drawer Menu Items 
          */
         public static final int nav_drawer_items=0x7f070000;
+        public static final int spinnerCid=0x7f070004;
         public static final int spinnerDay=0x7f070003;
         public static final int spinnerItems=0x7f070002;
-        public static final int spinnerSub=0x7f070005;
-        public static final int spinnerTest=0x7f070004;
+        public static final int spinnerSub=0x7f070006;
+        public static final int spinnerTest=0x7f070005;
     }
     public static final class attr {
     }
@@ -66,13 +67,15 @@ public final class R {
         public static final int tick=0x7f020014;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0026;
+        public static final int action_settings=0x7f0a0029;
         public static final int barsacn=0x7f0a0009;
         public static final int btnLogin=0x7f0a0007;
         public static final int btnLogout=0x7f0a001b;
         public static final int btnRegister=0x7f0a001a;
+        public static final int classid=0x7f0a0028;
         public static final int counter=0x7f0a001e;
-        public static final int day=0x7f0a0025;
+        public static final int datein=0x7f0a0021;
+        public static final int day=0x7f0a0027;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a001c;
@@ -97,13 +100,14 @@ public final class R {
         public static final int registerbloodgroup=0x7f0a000d;
         public static final int scrollView1=0x7f0a000a;
         public static final int spinner1=0x7f0a0014;
-        public static final int spinnerSub=0x7f0a0022;
-        public static final int spinnerTest=0x7f0a0021;
+        public static final int spinnerClassid=0x7f0a0020;
+        public static final int spinnerSub=0x7f0a0025;
+        public static final int spinnerTest=0x7f0a0024;
         public static final int textView1=0x7f0a0010;
-        public static final int the_table=0x7f0a0020;
+        public static final int the_table=0x7f0a0022;
         public static final int timbutton=0x7f0a0023;
         public static final int title=0x7f0a001d;
-        public static final int tv_counter=0x7f0a0024;
+        public static final int tv_counter=0x7f0a0026;
         public static final int txtLabel=0x7f0a001f;
     }
     public static final class layout {

@@ -55,6 +55,13 @@
             android:entries="@array/spinnerSub"
             android:gravity="center" />
 
+        <Spinner
+            android:id="@+id/spinnerClassid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/spinnerCid"
+            android:gravity="center"  />
+
         <TableLayout
             android:id="@+id/the_table"
             android:layout_width="fill_parent"

@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
 	private ActionBarDrawerToggle mDrawerToggle;
 	String message=null;
 	String message1=null;
+	int cid=0;
+	String date;
 	// nav drawer title
 	private CharSequence mDrawerTitle;
 
@@ -47,7 +49,8 @@ public class MainActivity extends Activity {
 		Intent intent = getIntent();
 		 message= intent.getStringExtra("message");
 		 message1= intent.getStringExtra("message1");
-		 
+		 date= intent.getStringExtra("date");
+		 cid= intent.getIntExtra("cid", 0);
 		mTitle = mDrawerTitle = getTitle();
 
 		// load slide menu items
@@ -116,6 +119,7 @@ public class MainActivity extends Activity {
 		}
 		if(message!=null && message1==null) displayView(2); 
 		if(message!=null && message1!=null) displayView(3);
+		if(date!=null && cid!=0) displayView(1);
 	}
 
 	/**
@@ -174,22 +178,30 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
+			Bundle bundle=new Bundle();
+			bundle.putString("date", date);
+			bundle.putInt("cid", cid);
 			fragment = new AttendanceActivty();
+			fragment.setArguments(bundle);
+			cid=0;
+			date=null;
 			break;
 		case 2:
-			Bundle bundle=new Bundle();
-			bundle.putString("message", message);
+			Bundle bundle1=new Bundle();
+			bundle1.putString("message", message);
+			bundle1.putInt("cid", cid);
 			fragment = new TimetableActivity();
-			fragment.setArguments(bundle);
+			fragment.setArguments(bundle1);
 			message=null;
 			message1=null;
 			break;
 		case 3:
-			Bundle bundle1=new Bundle();
-			bundle1.putString("message", message);
-			bundle1.putString("message1", message1);
+			Bundle bundle11=new Bundle();
+			bundle11.putInt("cid", cid);
+			bundle11.putString("message", message);
+			bundle11.putString("message1", message1);
 			fragment = new MarksFragment();
-			fragment.setArguments(bundle1);
+			fragment.setArguments(bundle11);
 			message=null;
 			message1=null;
 			break;

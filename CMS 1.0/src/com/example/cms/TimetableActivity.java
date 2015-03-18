@@ -28,13 +28,14 @@ import android.widget.Toast;
 public class TimetableActivity extends Fragment {
 
 	private int mRowCount = 0;
-	private Spinner selectday;
+	private Spinner selectday,classid;
 	String strtext = null;
 	String day = null;
 	private static String KEY_SUCCESS = "success";
 	private static String KEY_ERROR = "error";
 	private static String KEY_ERROR_MSG = "error_msg";
 	private static String KEY_DAY = "day";
+	String cid=null;int ci=0;
 	private static String KEY_PERIOD1 = "period1";
 	private static String KEY_PERIOD2 = "period2";
 	private static String KEY_PERIOD3 = "period3";
@@ -51,8 +52,23 @@ public class TimetableActivity extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		HashMap<String, String> userdetail_role = userFunction
+				.getUserDetails(getActivity());
+		String role = "role";
+		for (Map.Entry entry : userdetail_role.entrySet()) {
+			if (role.equals(entry.getKey())) {
+				role = entry.getValue().toString();
+				Toast.makeText(getActivity(), cid, 3000).show();
+				break; // breaking because its one to one map
+			}
+		}
 
 		day = getArguments().getString("message");
+		ci = getArguments().getInt("cid");
+		if(0<ci)
+		{
+			cid=Integer.toString(ci);
+		}
 
 		if (android.os.Build.VERSION.SDK_INT > 9) {
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -63,7 +79,11 @@ public class TimetableActivity extends Fragment {
 				container, false);
 
 		selectday = (Spinner) rootView.findViewById(R.id.day);
+		classid = (Spinner) rootView.findViewById(R.id.classid);
 		Button btnLogout = (Button) rootView.findViewById(R.id.timbutton);
+		if(role.equalsIgnoreCase("Student")){
+			classid.setVisibility(View.GONE);
+		}
 		btnLogout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -72,12 +92,13 @@ public class TimetableActivity extends Fragment {
 				// Toast.makeText(getActivity(), strtext, 3000).show();
 
 				int d = selectday.getSelectedItemPosition();
-				String arr[] = getResources()
-						.getStringArray(R.array.spinnerDay);
+				int cd = classid.getSelectedItemPosition();
+				String arr[] = getResources().getStringArray(R.array.spinnerDay);
+				String arr2[] = getResources().getStringArray(R.array.spinnerCid);
 				day = arr[d];
-				Intent intent = new Intent(getActivity().getBaseContext(),
-						MainActivity.class);
+				Intent intent = new Intent(getActivity().getBaseContext(),MainActivity.class);
 				intent.putExtra("message", day);
+				intent.putExtra("cid", cd);
 				getActivity().startActivity(intent);
 				getActivity().finish();
 			}
@@ -89,14 +110,14 @@ public class TimetableActivity extends Fragment {
 			HashMap<String, String> userdetail = userFunction
 					.getUserDetails(getActivity());
 			String value = "department";
-			String cid = null;
+			if(cid == null){
 			for (Map.Entry entry : userdetail.entrySet()) {
 				if (value.equals(entry.getKey())) {
 					cid = entry.getValue().toString();
 					Toast.makeText(getActivity(), cid, 3000).show();
 					break; // breaking because its one to one map
 				}
-			}
+			}}
 			JSONObject str = userFunction.Usertimetable(cid, day);
 			try {
 				JSONObject json_user = str.getJSONObject("user");
@@ -133,9 +154,9 @@ public class TimetableActivity extends Fragment {
 
 				System.out.println(entry.getKey() + ", " + entry.getValue());
 			}
-			
+			//
 		}
-		  new CountDownTask().execute();
+		 // new CountDownTask().execute();
 		return rootView;
 	}
 	 private class CountDownTask extends AsyncTask<Void, Integer, Void>{
