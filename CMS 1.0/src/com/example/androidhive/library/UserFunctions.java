@@ -22,12 +22,13 @@ public class UserFunctions {
 	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String URL = "http://14.96.13.66/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String URL = "http://14.99.193.64/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
 	//private static String URL = "http://192.168.1.2/cms/index.phpXDEBUG_SESSION_START=netbeans-xdebug";
 	private static String login_tag = "login";
 	private static String loginid_tag = "loginid";
 	private static String register_tag = "register";
 	private static String timetable_tag = "timetable";
+	private static String bus_tag = "busdetails";
 	private static String attendancetable_tag = "attendance";
 	private static String facultyattendancetable_tag = "facultyattendance";
 	private static String marks_tag = "marks";
@@ -92,6 +93,12 @@ public class UserFunctions {
 		params.add(new BasicNameValuePair("tag", facultyattendancetable_tag));
 		params.add(new BasicNameValuePair("classid", class_id));
 		params.add(new BasicNameValuePair("date", date));
+		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
+		return json;
+	}
+	public JSONObject busdetails(){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("tag", bus_tag));
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}
