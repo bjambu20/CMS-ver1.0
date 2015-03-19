@@ -112,8 +112,17 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
     
     else if ($tag == 'attendance'){
          $classid = $_POST['classid'];
-           $response["products"] = array();
+         $response["products"] = array();
          $responce = $db->getAttendancetable($classid);
+         echo json_encode($responce);
+    }else if($tag == 'busdetails'){
+        $responce = $db->getbus();
+        echo json_encode($responce);
+    }else if ($tag == 'facultyattendance'){
+         $classid = $_POST['classid'];
+         $date = $_POST['date'];
+           $response["products"] = array();
+         $responce = $db->getfacultyAttendancetable($classid,$date);
 
          echo json_encode($responce);
     }else if ($tag == 'marks'){
@@ -122,6 +131,13 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
          $sub = $_POST['sub'];
            $response["products"] = array();
          $responce = $db->getMarkstable($classid, $test, $sub);
+         echo json_encode($responce);
+    } else if ($tag == 'faculty_marks'){
+         $classid = $_POST['classid'];
+         $test = $_POST['test'];
+         $sub = $_POST['sub'];
+           $response["products"] = array();
+         $responce = $db->getMarkstablefaculty($classid, $test, $sub);
          echo json_encode($responce);
     } else if ($tag == 'loginid'){
          $uid = $_POST['uid'];

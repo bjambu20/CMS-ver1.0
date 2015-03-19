@@ -42,7 +42,22 @@ class DB_Functions {
         // return user details
         return mysql_fetch_array($result);
     }
+    
+        public function getbus() {
+        $response = array();
+        $result = mysql_query("SELECT * FROM bus_details");
+        // return user details
+        $response["products"] = array();
 
+        while ($row = mysql_fetch_array($result)) {
+            // temp user array
+            $product = array();
+            $product["pid"] = $row["bus_id"];
+            $product["name"] = $row["route"];
+            array_push($response["products"], $product);
+        }
+        return $response;
+    }
     public function getAttendancetable($classid) {
         $response = array();
         $result = mysql_query("SELECT * FROM attendance WHERE student_id = $classid");
@@ -54,6 +69,23 @@ class DB_Functions {
             // temp user array
             $product = array();
             $product["pid"] = $row["date"];
+            $product["name"] = $row["value"];
+            array_push($response["products"], $product);
+        }
+        return $response;
+    }
+    
+        public function getfacultyAttendancetable($classid, $date) {
+        $response = array();
+        $result = mysql_query("SELECT * FROM attendance WHERE class_id = '$classid' AND date='$date'");
+        // return user details
+        //return mysql_fetch_array($result);
+        $response["products"] = array();
+
+        while ($row = mysql_fetch_array($result)) {
+            // temp user array
+            $product = array();
+            $product["pid"] = $row["student_id"];
             $product["name"] = $row["value"];
             array_push($response["products"], $product);
         }
@@ -71,6 +103,23 @@ class DB_Functions {
             // temp user array
             $product = array();
             $product["pid"] = $sub;
+            $product["name"] = $row[$sub];
+
+            array_push($response["products"], $product);
+        }
+        return $response;
+    }
+       public function getMarkstablefaculty($classid, $test, $sub) {
+        $response = array();
+        $result = mysql_query("SELECT *FROM $test WHERE class_id = $classid");
+        // return user details
+        //return mysql_fetch_array($result);
+        $response["products"] = array();
+
+        while ($row = mysql_fetch_array($result)) {
+            // temp user array
+            $product = array();
+            $product["pid"] = $row["student_id"];
             $product["name"] = $row[$sub];
 
             array_push($response["products"], $product);
