@@ -92,11 +92,9 @@ class DB_Functions {
         return $response;
     }
 
-    public function getMarkstable($classid, $test, $sub) {
+    public function getMarkstable($classid, $test, $sub, $depid) {
         $response = array();
         $result = mysql_query("SELECT *FROM $test WHERE student_id = $classid");
-        // return user details
-        //return mysql_fetch_array($result);
         $response["products"] = array();
 
         while ($row = mysql_fetch_array($result)) {
@@ -107,13 +105,119 @@ class DB_Functions {
 
             array_push($response["products"], $product);
         }
+       //attaching legent at end of marks for classid=1 (it-1st year)
+        if($depid=="1"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-2nd year)
+        if($depid=="2"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-3rd year)
+        if($depid=="3"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-4th year)
+        if($depid=="4"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
         return $response;
     }
        public function getMarkstablefaculty($classid, $test, $sub) {
         $response = array();
         $result = mysql_query("SELECT *FROM $test WHERE class_id = $classid");
-        // return user details
-        //return mysql_fetch_array($result);
         $response["products"] = array();
 
         while ($row = mysql_fetch_array($result)) {
@@ -123,6 +227,114 @@ class DB_Functions {
             $product["name"] = $row[$sub];
 
             array_push($response["products"], $product);
+        }
+        //attaching legent at end of marks for classid=1 (it-1st year)
+             if($classid=="1"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-2nd year)
+        if($classid=="2"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-3rd year)
+        if($classid=="3"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
+        }
+    //attaching legent at end of marks for classid=1 (it-4th year)
+        if($classid=="4"){
+            $product = array();
+            $product["pid"] = "sub-1";
+            $product["name"] = "MATHS";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-2";
+            $product["name"] = "EG";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-3";
+            $product["name"] = "EEFA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-4";
+            $product["name"] = "SEQA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-5";
+            $product["name"] = "SOA";
+        array_push($response["products"], $product);
+            $product = array();
+            $product["pid"] = "sub-6";
+            $product["name"] = "MC";
+        array_push($response["products"], $product);
         }
         return $response;
     }

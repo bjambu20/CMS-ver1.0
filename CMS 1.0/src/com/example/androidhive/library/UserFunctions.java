@@ -22,7 +22,7 @@ public class UserFunctions {
 	//private static Ipaddress ip;
 	private JSONParser jsonParser;
 	
-	private static String URL = "http://14.99.193.64/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
+	private static String URL = "http://192.168.1.4/cms/index.php";//?XDEBUG_SESSION_START=netbeans-xdebug";
 	//private static String URL = "http://192.168.1.2/cms/index.phpXDEBUG_SESSION_START=netbeans-xdebug";
 	private static String login_tag = "login";
 	private static String loginid_tag = "loginid";
@@ -102,13 +102,14 @@ public class UserFunctions {
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}
-	public JSONObject Usermarkstable(String class_id,String test,String sub) {
+	public JSONObject Usermarkstable(String class_id,String test,String sub,String depid) {
 		// TODO Auto-generated method stub
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("tag", marks_tag));
 		params.add(new BasicNameValuePair("classid", class_id));
 		params.add(new BasicNameValuePair("test", test));
 		params.add(new BasicNameValuePair("sub", sub));
+		params.add(new BasicNameValuePair("depid", depid));
 		JSONObject json = jsonParser.getJSONFromUrl(URL, params);
 		return json;
 	}	

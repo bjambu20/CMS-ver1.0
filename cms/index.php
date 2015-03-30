@@ -129,8 +129,9 @@ if (isset($_POST['tag']) && $_POST['tag'] != '') {
          $classid = $_POST['classid'];
          $test = $_POST['test'];
          $sub = $_POST['sub'];
+         $depid = $_POST['depid'];
            $response["products"] = array();
-         $responce = $db->getMarkstable($classid, $test, $sub);
+         $responce = $db->getMarkstable($classid, $test, $sub, $depid);
          echo json_encode($responce);
     } else if ($tag == 'faculty_marks'){
          $classid = $_POST['classid'];
