@@ -46,25 +46,26 @@ public final class R {
     public static final class drawable {
         public static final int app_icon=0x7f020000;
         public static final int btn=0x7f020001;
-        public static final int counter_bg=0x7f020002;
-        public static final int cup=0x7f020003;
-        public static final int greybackground=0x7f020004;
-        public static final int ic_communities=0x7f020005;
-        public static final int ic_drawer=0x7f020006;
-        public static final int ic_home=0x7f020007;
-        public static final int ic_launcher=0x7f020008;
-        public static final int ic_pages=0x7f020009;
-        public static final int ic_people=0x7f02000a;
-        public static final int ic_photos=0x7f02000b;
-        public static final int ic_whats_hot=0x7f02000c;
-        public static final int icon1=0x7f02000d;
-        public static final int linkedin=0x7f02000e;
-        public static final int list_item_bg_normal=0x7f02000f;
-        public static final int list_item_bg_pressed=0x7f020010;
-        public static final int list_selector=0x7f020011;
-        public static final int plan=0x7f020012;
-        public static final int select=0x7f020013;
-        public static final int tick=0x7f020014;
+        public static final int campusmap=0x7f020002;
+        public static final int counter_bg=0x7f020003;
+        public static final int cup=0x7f020004;
+        public static final int greybackground=0x7f020005;
+        public static final int ic_communities=0x7f020006;
+        public static final int ic_drawer=0x7f020007;
+        public static final int ic_home=0x7f020008;
+        public static final int ic_launcher=0x7f020009;
+        public static final int ic_pages=0x7f02000a;
+        public static final int ic_people=0x7f02000b;
+        public static final int ic_photos=0x7f02000c;
+        public static final int ic_whats_hot=0x7f02000d;
+        public static final int icon1=0x7f02000e;
+        public static final int linkedin=0x7f02000f;
+        public static final int list_item_bg_normal=0x7f020010;
+        public static final int list_item_bg_pressed=0x7f020011;
+        public static final int list_selector=0x7f020012;
+        public static final int plan=0x7f020013;
+        public static final int select=0x7f020014;
+        public static final int tick=0x7f020015;
     }
     public static final class id {
         public static final int action_settings=0x7f0a0029;
